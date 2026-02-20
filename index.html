@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>In Loving Memory</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -19,16 +20,16 @@ body {
 header {
     padding: 45px 20px 10px;
 }
+
 .hero {
     min-height: 100vh;
     padding: 30px 15px 20px;
     background: white;
-
     display: flex;
     flex-direction: column;
-
-    justify-content: flex-start;   /* ← KEY CHANGE */
+    justify-content: flex-start;
 }
+
 .main-heading {
     font-family: 'Playfair Display', serif;
     font-size: 30px;
@@ -37,7 +38,7 @@ header {
     letter-spacing: 1.2px;
     text-transform: uppercase;
 }
-/* Bigger Main Photo */
+
 .main-photo {
     width: 350px;
     height: 350px;
@@ -46,7 +47,6 @@ header {
     box-shadow: 0 5px 18px rgba(0,0,0,0.18);
 }
 
-/* Names */
 .names {
     margin-top: 22px;
     font-size: 21px;
@@ -59,7 +59,6 @@ header {
     margin-top: 4px;
 }
 
-/* Tribute */
 .tribute {
     margin-top: 18px;
     font-size: 15px;
@@ -72,21 +71,6 @@ section {
     padding: 25px 15px;
 }
 
-h2 {
-    color: #000000;
-    margin-bottom: 12px;
-    font-size: 18px;
-}
-
-.story {
-    max-width: 640px;
-    margin: auto;
-    font-size: 15px;
-    line-height: 1.7;
-    color: #444;
-}
-
-/* Gallery */
 .gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -96,7 +80,8 @@ h2 {
     margin: auto;
 }
 
-.gallery img {
+.gallery img,
+.gallery-video {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
@@ -106,6 +91,7 @@ h2 {
 }
 
 /* Viewer */
+
 .viewer {
     display: none;
     position: fixed;
@@ -117,7 +103,8 @@ h2 {
     flex-direction: column;
 }
 
-.viewer img {
+.viewer img,
+.viewer video {
     max-width: 92%;
     max-height: 75%;
 }
@@ -130,6 +117,7 @@ h2 {
     color: white;
     cursor: pointer;
 }
+
 .divider {
     width: 180px;
     height: 1px;
@@ -143,6 +131,8 @@ footer {
     color: #888;
 }
 
+/* Music Overlay */
+
 #music-overlay {
     position: fixed;
     inset: 0;
@@ -151,6 +141,7 @@ footer {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    transition: opacity 0.3s ease;
 }
 
 #play-music-btn {
@@ -161,48 +152,36 @@ footer {
     font-size: 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     cursor: pointer;
-
-    /* Prevent weird mobile behaviour */
     user-select: none;
     -webkit-user-select: none;
 }
-	#music-overlay {
-    transition: opacity 0.3s ease;
-}
-	
-	.video-container {
-    max-width: 700px;
-    margin: 0 auto 12px;
-    padding: 0 10px;
-}
 
-.video-container video {
-    width: 100%;
-    border-radius: 8px;      /* Same as gallery */
-    display: block;
-}
 </style>
 </head>
 
 <body>
-	<div id="music-overlay">
+
+<div id="music-overlay">
     <button id="play-music-btn">🔊 Play Background Music</button>
 </div>
 
 <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
+
 <section class="hero">
 <header>
-	<h1 class="main-heading">In Loving Memory</h1>
+
+    <h1 class="main-heading">In Loving Memory</h1>
 
     <img src="main.jpg" class="main-photo">
 
     <div class="names">
         <strong>ഐപ്പ്‌ വർഗ്ഗീസ്</strong>
         <div class="dates">15-10-1940 – 19-02-2000</div>
-        
-<div class="divider"></div>
+
+        <div class="divider"></div>
+
         <strong>ലീല ഐപ്പ്‌</strong>
         <div class="dates">25-10-1940 – 27-12-2018</div>
     </div>
@@ -214,12 +193,19 @@ footer {
 
 </header>
 </section>
+
 <section class="memories">
-<section>
+
     <h1>ഓർമ്മകൾ</h1>
 
     <div class="gallery">
-		
+
+        <!-- Video Tile -->
+        <video class="gallery-video" onclick="openVideo()" autoplay loop muted playsinline>
+            <source src="memory.mp4" type="video/mp4">
+        </video>
+
+        <!-- Images -->
         <img src="2.jpg" onclick="openViewer(0)">
         <img src="3.jpg" onclick="openViewer(1)">
         <img src="4.jpg" onclick="openViewer(2)">
@@ -228,7 +214,7 @@ footer {
         <img src="7.jpg" onclick="openViewer(5)">
         <img src="8.jpg" onclick="openViewer(6)">
         <img src="9.jpg" onclick="openViewer(7)">
-		<img src="10.jpeg" onclick="openViewer(8)">
+        <img src="10.jpeg" onclick="openViewer(8)">
         <img src="11.jpeg" onclick="openViewer(9)">
         <img src="12.jpeg" onclick="openViewer(10)">
         <img src="13.jpeg" onclick="openViewer(11)">
@@ -236,99 +222,115 @@ footer {
         <img src="15.jpeg" onclick="openViewer(13)">
         <img src="16.jpeg" onclick="openViewer(14)">
         <img src="17.jpeg" onclick="openViewer(15)">
-		<img src="18.jpeg" onclick="openViewer(16)">
-		<img src="19.jpeg" onclick="openViewer(17)">
-		<div class="video-container">
-    <video autoplay loop muted playsinline>
-        <source src="memory.mp4" type="video/mp4">
-    </video>
-</div>
+        <img src="18.jpeg" onclick="openViewer(16)">
+        <img src="19.jpeg" onclick="openViewer(17)">
+
     </div>
+
 </section>
 
-<!-- Swipe Viewer -->
+<!-- Viewer -->
 <div class="viewer" id="viewer">
     <div class="close" onclick="closeViewer()">×</div>
-    <img id="viewer-img">
-</div>
-	
 
+    <img id="viewer-img">
+    <video id="viewer-video" autoplay loop muted playsinline style="display:none;"></video>
+</div>
 
 <footer>
     Forever remembered with love ❤️
 </footer>
-</section>
+
 <script>
 
 const images = [
     "2.jpg","3.jpg","4.jpg","5.jpg",
-    "6.jpg","7.jpg","8.jpg","9.jpg","10.jpeg","11.jpeg","12.jpeg",
-    "13.jpeg","14.jpeg","15.jpeg","16.jpeg","17.jpeg","18.jpeg","19.jpeg"
+    "6.jpg","7.jpg","8.jpg","9.jpg",
+    "10.jpeg","11.jpeg","12.jpeg",
+    "13.jpeg","14.jpeg","15.jpeg",
+    "16.jpeg","17.jpeg","18.jpeg","19.jpeg"
 ];
 
 let currentIndex = 0;
 
+const viewer = document.getElementById("viewer");
+const viewerImg = document.getElementById("viewer-img");
+const viewerVideo = document.getElementById("viewer-video");
+
+/* Image Viewer */
 function openViewer(index) {
     currentIndex = index;
-    document.getElementById("viewer").style.display = "flex";
-    document.getElementById("viewer-img").src = images[index];
+
+    viewerVideo.style.display = "none";
+    viewerImg.style.display = "block";
+
+    viewer.style.display = "flex";
+    viewerImg.src = images[index];
 }
 
-function closeViewer() {
-    document.getElementById("viewer").style.display = "none";
+/* Video Viewer */
+function openVideo() {
+    viewerImg.style.display = "none";
+    viewerVideo.style.display = "block";
+
+    viewer.style.display = "flex";
+    viewerVideo.innerHTML = '<source src="memory.mp4" type="video/mp4">';
+    viewerVideo.load();
 }
+
+/* Close */
+function closeViewer() {
+    viewer.style.display = "none";
+    viewerVideo.pause();
+}
+
+/* Swipe */
+let startX = 0;
+
+viewer.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+viewer.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+
+    if (viewerImg.style.display === "block") {
+        if (endX - startX > 50) showPrev();
+        if (startX - endX > 50) showNext();
+    }
+});
 
 function showNext() {
     currentIndex = (currentIndex + 1) % images.length;
-    document.getElementById("viewer-img").src = images[currentIndex];
+    viewerImg.src = images[currentIndex];
 }
 
 function showPrev() {
     currentIndex = (currentIndex - 1 + images.length) % images.length;
-    document.getElementById("viewer-img").src = images[currentIndex];
+    viewerImg.src = images[currentIndex];
 }
 
-/* Swipe Detection */
-let startX = 0;
-
-document.getElementById("viewer").addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-});
-
-document.getElementById("viewer").addEventListener("touchend", e => {
-    let endX = e.changedTouches[0].clientX;
-    if (endX - startX > 50) showPrev();
-    if (startX - endX > 50) showNext();
-});
-	
+/* Music */
 const music = document.getElementById("bg-music");
 const overlay = document.getElementById("music-overlay");
 const button = document.getElementById("play-music-btn");
 
-/* Try autoplay */
 window.addEventListener("load", () => {
-
     const attempt = music.play();
-
     if (attempt !== undefined) {
-        attempt
-            .then(removeOverlay)
-            .catch(() => {
-                /* Autoplay blocked → wait for tap */
-            });
+        attempt.then(removeOverlay).catch(() => {});
     }
 });
 
-/* Button click */
 button.addEventListener("click", () => {
     music.play();
     removeOverlay();
 });
 
-/* FULL REMOVAL (Never Sticks) */
 function removeOverlay() {
     if (overlay) overlay.remove();
 }
+
 </script>
 
 </body>
